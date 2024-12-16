@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    int fd = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    int fd = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH); // "|": O bit a bit.
         // Només escriure, crear el fitxer, esborra el contingut si el fitxer existeix, lectura/escriptura per al propietari, només lectura per altres usua>
     if (fd == -1) { // Si open falla, retorna -1, i utilitzem perror per mostrar l'error.
         perror("Error obrint el fitxer");
@@ -34,3 +34,4 @@ int main(int argc, char *argv[]) {
             exit(EXIT_FAILURE);
         }
     }
+}
