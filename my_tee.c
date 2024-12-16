@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     }
 
     int fd = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	// Només escriure, crear el fitxer, esborra el contingut si el fitxer existeix, lectura/escriptura per al propietari, només lectura per altres usuaris.
+        // Només escriure, crear el fitxer, esborra el contingut si el fitxer existeix, lectura/escriptura per al propietari, només lectura per altres usua>
     if (fd == -1) { // Si open falla, retorna -1, i utilitzem perror per mostrar l'error.
         perror("Error obrint el fitxer");
         exit(EXIT_FAILURE);
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     char buffer[BUFFER_SIZE]; // Emmagatzema les dades llegides temporalment.
     ssize_t bytes_read; // Guarda el nombre de bytes llegits a cada operació.
 
-    while ((bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE)) > 0) { // Llegeix BUFFER_SIZE bytes des de l'entrada. Retorna 0 si no hi ha res més a llegir.
+    while ((bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE)) > 0) { // Llegeix BUFFER_SIZE bytes des de l'entrada. Retorna 0 si no hi ha res més a lle>
         if (write(STDOUT_FILENO, buffer, bytes_read) == -1) { // Escriu les dades llegides amb el bytes_read.
             perror("Error escrivint a la sortida estàndard");
             close(fd);
@@ -34,17 +34,3 @@ int main(int argc, char *argv[]) {
             exit(EXIT_FAILURE);
         }
     }
-
-    if (bytes_read == -1) { // Retorna un possible error de lectura.
-        perror("Error llegint de l'entrada estàndard");
-        close(fd);
-        exit(EXIT_FAILURE);
-    }
-
-    if (close(fd) == -1) { // Tanca el fitxer i en cas d'error el mostra.
-        perror("Error tancant el fitxer");
-        exit(EXIT_FAILURE);
-    }
-
-    return 0;
-}
